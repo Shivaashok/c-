@@ -1,0 +1,15 @@
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+
+# Create a data frame with weekday and week of year columns
+activity_data <- data.frame(
+  Date = as.Date(c("2023-01-01", "2023-01-02", "2023-01-03", "2023-01-04", "2023-01-05")),
+  Count = c(10, 12, 15, 8, 20)
+) %>%
+  mutate(Weekday = wday(Date, label = TRUE), Week = week(Date))
+windows()
+# Plot calendar heatmap
+ggplot(activity_data, aes(x = Weekday, y = Week, fill = Count)) +
+  geom_tile(color = "white") +
+  scale_fill_gradient(low = "white", high = "blue")
